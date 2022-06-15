@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<title>Customer retention predictor</title>
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="container">
+  <div class="py-5 text-center">
+    <h1><b>Customer Retention</b></h1>
+    <p class="lead">Your prediction is:</p>
+    {%if prediction_text == "" %}
+    <p class="lead">Please fill out the form to predict the customer retention</p>
+    {%else%}
+    <h1><u>{{ prediction_text }}</u></h1>
+    {%endif%}
+  </div>
+  <div class="row">
+  <div class="col-md-2">
+  </div>
+    <div class="col-md-8">
+ <div class="login">
+     <form action="{{ url_for('predict')}}"method="post">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="Gender">Gender</label>
+            <select name = "gender" class="form-control" id = "gender" required = "required">
+              <option value = 1>Male</option>
+              <option value=0>Female</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="Senior Citizen">Senior Citizen</label>
+            <select name = "SeniorCitizen" class="form-control" id = "SeniorCitizen" required = "required">
+              <option value=0>No</option>
+              <option value = 1>Yes</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="Partner">Partner</label>
+            <select name = "Partner" class="form-control" id = "Partner" required = "required">
+              <option value=0>No</option>
+              <option value = 1>Yes</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="Dependents">Dependents</label>
+            <select name = "Dependents" class="form-control" id = "Dependents" required = "required">
+              <option value=0>No</option>
+              <option value = 1>Yes</option>
+            </select>
+          </div>
+        </div>
+
+		<div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="tenure">Tenure</label>
+              <input type="number" class="form-control" id="tenure" name="tenure" required = "required" value = 1>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="PhoneService">Phone Service</label>
+            <select name = "PhoneService" class="form-control" id = "PhoneService" required = "required">
+              <option value=0>No</option>
+              <option value = 1>Yes</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="MultipleLines">Multiple Lines</label>
+            <select name = "MultipleLines" class="form-control" id = "MultipleLines" required = "required">
+              <option value ="No phone service">No phone service</option>
+              <option value="No">No</option>
+              <option value = "Yes">Yes</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="InternetService">Internet Service</label>
+            <select name = "InternetService" class="form-control" id = "InternetService" required = "required">
+              <option value="No">No</option>
+              <option value ="DSL">DSL</option>
+              <option value = "Fiber optic">Fiber optic</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+            <label for="OnlineSecurity">Online Security</label>
+            <select name = "OnlineSecurity" class="form-control" id = "OnlineSecurity" required = "required">
+              <option value ="No internet service">No internet service</option>
+              <option value="No">No</option>
+              <option value = "Yes">Yes</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="OnlineBackup">Online Backup</label>
+            <select name = "OnlineBackup" class="form-control" id = "OnlineBackup" required = "required">
+              <option value ="No internet service">No internet service</option>
+              <option value="No">No</option>
+              <option value = "Yes">Yes</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="DeviceProtection">Device Protection</label>
+            <select name = "DeviceProtection" class="form-control" id = "DeviceProtection" required = "required">
+              <option value ="No internet service">No internet service</option>
+              <option value="No">No</option>
+              <option value = "Yes">Yes</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="TechSupport">Tech Support</label>
+              <select name = "TechSupport" class="form-control" id = "TechSupport" required = "required">
+                <option value ="No internet service">No internet service</option>
+                <option value="No">No</option>
+                <option value = "Yes">Yes</option>
+              </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+            <label for="StreamingTV">Streaming TV</label>
+            <select name = "StreamingTV" class="form-control" id = "StreamingTV" required = "required">
+              <option value ="No internet service">No internet service</option>
+              <option value="No">No</option>
+              <option value = "Yes">Yes</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="StreamingMovies">Streaming Movies</label>
+            <select name = "StreamingMovies" class="form-control" id = "StreamingMovies" required = "required">
+              <option value ="No internet service">No internet service</option>
+              <option value="No">No</option>
+              <option value = "Yes">Yes</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="Contract">Contract</label>
+            <select name = "Contract" class="form-control" id = "Contract" required = "required">
+                <option value ="Month-to-month">Month-to-month</option>
+                <option value="One year">One year</option>
+                <option value = "Two year">Two year</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="PaperlessBilling">Paperless Billing</label>
+            <select name = "PaperlessBilling" class="form-control" id = "PaperlessBilling" required = "required">
+                <option value="No">No</option>
+                <option value = "Yes">Yes</option>
+            </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+            <label for="PaymentMethod">Payment Method</label>
+            <select name = "PaymentMethod" class="form-control" id = "PaymentMethod" required = "required">
+                <option value ="Electronic check">Electronic check</option>
+                <option value="Mailed check">Mailed check</option>
+                <option value = "Credit card (automatic)">Credit card (automatic)</option>
+                <option value = "Bank transfer (automatic)">Bank transfer (automatic)</option>
+            </select>
+            </div>
+            <div class="col-md-6 mb-3">
+            <label for="MonthlyCharges">Monthly Charges</label>
+            <input type="number" class="form-control" id="MonthlyCharges" name="MonthlyCharges" required = "required" value = 0>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Predict</button>
+     </form>
+ </div>
+</body>
+</html>
